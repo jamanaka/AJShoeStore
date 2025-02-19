@@ -12,6 +12,13 @@ const NavbarForLandingPage = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  // Define routes for navigation links
+  const navLinks = [
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about-us" },
+    { name: "Contact", href: "/contact-us" },
+  ];
+
   return (
     <div className="h-20 w-screen mx-auto top-0 z-50 fixed bg-white shadow-md">
       <div className="container mx-auto h-full flex justify-between items-center px-4 md:px-6 lg:px-8">
@@ -29,17 +36,17 @@ const NavbarForLandingPage = () => {
 
         {/* Desktop Navigation Links */}
         <nav className="hidden md:flex space-x-6">
-          {["Home", "Shop", "About", "Contact"].map((link, index) => (
-            <motion.a
-              key={link}
-              href="#"
-              className="text-gray-700 hover:text-gray-900 transition duration-300"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              {link}
-            </motion.a>
+          {navLinks.map((link, index) => (
+            <Link key={link.name} href={link.href}>
+              <motion.div
+                className="text-gray-700 hover:text-gray-900 transition duration-300"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                {link.name}
+              </motion.div>
+            </Link>
           ))}
         </nav>
 
@@ -62,7 +69,7 @@ const NavbarForLandingPage = () => {
           >
             <ShoppingCart className="h-6 w-6" />
           </Link>
-          <Link href={"/login"}>
+          <Link href="/login">
             <button className="bg-blue-800 hidden sm:block text-white px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300">
               Sign In
             </button>
@@ -93,17 +100,17 @@ const NavbarForLandingPage = () => {
             className="md:hidden bg-white shadow-lg"
           >
             <nav className="flex flex-col space-y-6 p-4">
-              {["Home", "Shop", "About", "Contact"].map((link, index) => (
-                <motion.a
-                  key={link}
-                  href="#"
-                  className="text-gray-700 hover:text-gray-900 text-xl font-bold transition duration-300"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                >
-                  {link}
-                </motion.a>
+              {navLinks.map((link, index) => (
+                <Link key={link.name} href={link.href}>
+                  <motion.div
+                    className="text-gray-700 hover:text-gray-900 text-xl font-bold transition duration-300"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                  >
+                    {link.name}
+                  </motion.div>
+                </Link>
               ))}
               <Link
                 href="/register"
@@ -113,7 +120,7 @@ const NavbarForLandingPage = () => {
                   Register
                 </Button>
               </Link>
-              <Link href={"/login"}>
+              <Link href="/login">
                 <button className="bg-blue-800 sm:block text-white px-7 py-2 rounded-full hover:bg-gray-800 transition duration-300">
                   Sign In
                 </button>

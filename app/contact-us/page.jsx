@@ -1,16 +1,16 @@
-import React from 'react'
-import ContactUsForm from '../../components/Form/ContactUsForm'
-import NavbarForLandingPage from '../../components/Navbar/NavbarForLandingPage'
-import Footer from '../../components/Footer/Footer'
+import React from "react";
+import ContactUsForm from "../../components/Form/ContactUsForm";
+import NavbarForLandingPage from "../../components/Navbar/NavbarForLandingPage";
+import Footer from "../../components/Footer/Footer";
 
 const page = () => {
   return (
     <div>
-        <NavbarForLandingPage />
+      <NavbarForLandingPage />
       <ContactUsForm />
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;
