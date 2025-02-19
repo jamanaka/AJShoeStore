@@ -1,0 +1,129 @@
+"use client";
+import React, { useState } from "react";
+import { ShoppingCart, Menu, X } from "lucide-react"; // Import icons for menu and close
+import { motion, AnimatePresence } from "framer-motion"; // For animations
+import Link from "next/link";
+import { Button } from "../ui/button";
+
+const NavbarForLandingPage = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  return (
+    <div className="h-20 w-screen mx-auto top-0 z-50 fixed bg-white shadow-md">
+      <div className="container mx-auto h-full flex justify-between items-center px-4 md:px-6 lg:px-8">
+        {/* Logo */}
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-2xl font-extrabold border hover:shadow text-green-600 shadow-lg bg-gradient-to-l to-blue-900 from-green-900 shadow-green-800 px-8 rounded-full py-3"
+        >
+          <Link href="/">
+            AJ<span className="text-blue-600">ShoeStore</span>
+          </Link>
+        </motion.div>
+
+        {/* Desktop Navigation Links */}
+        <nav className="hidden md:flex space-x-6">
+          {["Home", "Shop", "About", "Contact"].map((link, index) => (
+            <motion.a
+              key={link}
+              href="#"
+              className="text-gray-700 hover:text-gray-900 transition duration-300"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              {link}
+            </motion.a>
+          ))}
+        </nav>
+
+        {/* Shopping Cart and Sign In Button */}
+        <motion.div
+          className="flex items-center space-x-4"
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Link
+            href="/register"
+            className="text-[#258A6D] hidden sm:block hover:underline text-sm hover:text-blue-600 transition duration-300"
+          >
+            Register
+          </Link>
+          <Link
+            href="#"
+            className="text-gray-700 hover:text-gray-900 transition duration-300"
+          >
+            <ShoppingCart className="h-6 w-6" />
+          </Link>
+          <Link href={"/login"}>
+            <button className="bg-blue-800 hidden sm:block text-white px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300">
+              Sign In
+            </button>
+          </Link>
+        </motion.div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden text-gray-700 hover:text-gray-900 focus:outline-none"
+          onClick={toggleMobileMenu}
+        >
+          {isMobileMenuOpen ? (
+            <X className="h-6 w-6" />
+          ) : (
+            <Menu className="h-6 w-6" />
+          )}
+        </button>
+      </div>
+
+      {/* Mobile Menu with Animation */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden bg-white shadow-lg"
+          >
+            <nav className="flex flex-col space-y-6 p-4">
+              {["Home", "Shop", "About", "Contact"].map((link, index) => (
+                <motion.a
+                  key={link}
+                  href="#"
+                  className="text-gray-700 hover:text-gray-900 text-xl font-bold transition duration-300"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                >
+                  {link}
+                </motion.a>
+              ))}
+              <Link
+                href="/register"
+                className="text-white sm:block hover:underline text-sm hover:text-blue-600 transition duration-300"
+              >
+                <Button className="bg-green-800 py-4 rounded-full">
+                  Register
+                </Button>
+              </Link>
+              <Link href={"/login"}>
+                <button className="bg-blue-800 sm:block text-white px-7 py-2 rounded-full hover:bg-gray-800 transition duration-300">
+                  Sign In
+                </button>
+              </Link>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+export default NavbarForLandingPage;
