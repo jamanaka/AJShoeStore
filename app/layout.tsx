@@ -20,7 +20,11 @@ export const metadata: Metadata = {
   verification: {
     google: "Y7XAcvHfkyxSQCl6JmQwAhXivRrVXoYpTW7mDL0sR68",
   },
+  alternates: {
+    canonical: "https://www.ajshoestore.com/",
+  },
 };
+
 
 // ✅ Define viewport separately
 export const viewport = {
