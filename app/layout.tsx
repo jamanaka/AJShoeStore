@@ -17,8 +17,8 @@ export const metadata: Metadata = {
   description:
     "Shop the latest trends in footwear at AJShoeStore. Find stylish, high-quality shoes for every occasion, from casual to formal. With great prices!",
   viewport: "width=device-width, initial-scale=1",
-  other: {
-    "google-site-verification": "Y7XAcvHfkyxSQCl6JmQwAhXivRrVXoYpTW7mDL0sR68",
+  verification: {
+    google: "Y7XAcvHfkyxSQCl6JmQwAhXivRrVXoYpTW7mDL0sR68",
   },
 };
 
