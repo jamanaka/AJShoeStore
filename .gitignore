@@ -1,5 +1,11 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# To change setting for deployment
+https://vercel.com/amadou-jamankas-projects/ajshoestore/settings
+
+#Production
+https://ajshoestore-g571a2xj0-amadou-jamankas-projects.vercel.app 
+
 # dependencies
 /node_modules
 /.pnp
@@ -39,3 +45,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.vercel
