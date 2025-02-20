@@ -12,16 +12,17 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// ✅ Remove viewport from metadata
 export const metadata: Metadata = {
   title: "AJShoeStore",
   description:
     "Shop the latest trends in footwear at AJShoeStore. Find stylish, high-quality shoes for every occasion, from casual to formal. With great prices!",
-  viewport: "width=device-width, initial-scale=1",
   verification: {
     google: "Y7XAcvHfkyxSQCl6JmQwAhXivRrVXoYpTW7mDL0sR68",
   },
 };
 
+// ✅ Define viewport separately
 export const viewport = {
   width: "device-width",
   initialScale: 1,
