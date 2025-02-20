@@ -14,13 +14,13 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "AJShoeStore",
-  description: "Shop the latest trends in footwear at AJShoeStore. Find stylish, high-quality shoes for every occasion, from casual to formal. With great prices!",
+  description:
+    "Shop the latest trends in footwear at AJShoeStore. Find stylish, high-quality shoes for every occasion, from casual to formal. With great prices!",
   viewport: "width=device-width, initial-scale=1",
   other: {
     "google-site-verification": "Y7XAcvHfkyxSQCl6JmQwAhXivRrVXoYpTW7mDL0sR68",
   },
 };
-{/* <meta name="google-site-verification" content="Y7XAcvHfkyxSQCl6JmQwAhXivRrVXoYpTW7mDL0sR68" /> */}
 
 export default function RootLayout({
   children,
