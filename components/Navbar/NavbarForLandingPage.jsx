@@ -116,12 +116,14 @@ const NavbarForLandingPage = () => {
                 href="/register"
                 className="text-white sm:block hover:underline text-sm hover:text-blue-600 transition duration-300"
               >
-                <Button className="bg-green-800 py-4 rounded-full">
+                <button className="bg-green-800 sm:block text-white px-7 py-2 rounded-full hover:bg-gray-800 transition duration-300">
                   Register
-                </Button>
+                </button>
               </Link>
-              <Link href="/login">
-                <button className="bg-blue-800 sm:block text-white px-7 py-2 rounded-full hover:bg-gray-800 transition duration-300">
+              <Link href="/login"
+              className="text-white sm:block hover:underline text-sm hover:text-blue-600 transition duration-300"
+              >
+                <button className="bg-blue-800 sm:block text-white px-8 py-2 rounded-full hover:bg-gray-800 transition duration-300">
                   Sign In
                 </button>
               </Link>
