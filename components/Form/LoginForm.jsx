@@ -78,9 +78,22 @@ const LoginForm = () => {
           <h1 className="text-3xl text-center lg:text-start lg:text-4xl font-bold text-green-500 leading-tight">
             Welcome Back!
           </h1>
-          <p className="text-md lg:text-md font-bold text-center mb-5 lg:text-justify text-black">
+          <p className="text-md lg:text-md font-bold text-center mb-1 lg:text-justify text-black">
             Sign in to your account to continue.
           </p>
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-4"
+          >
+            <Link
+              href="/"
+              className="text-lg font-semibold text-center hover:text-green-400 underline text-white"
+            >
+              GO BACK TO HOME PAGE
+            </Link>
+          </motion.div>
         </motion.div>
 
         {/* Form Container */}

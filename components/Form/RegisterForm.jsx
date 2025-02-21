@@ -64,19 +64,6 @@ const RegisterForm = () => {
 
   return (
     <div className="bg-gradient-to-l to-blue-900 from-green-800">
-      {/* <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5 }}
-        className=""
-      >
-        <Link
-          href="/"
-          className="text-2xl ml-1 w-auto font-extrabold border hover:shadow text-green-600 shadow-lg bg-gradient-to-l to-blue-900 from-green-900 shadow-green-800 px-8 rounded-full py-3"
-        >
-          AJ<span className="text-blue-600">ShoeStore</span>
-        </Link>
-      </motion.div> */}
       <div
         ref={sectionRef}
         className="flex flex-col lg:flex-row lg:mt-2 py-6 lg-0 justify-center items-center min-h-screen bg-gradient-to-l to-blue-900 from-green-800 lg: px-4 sm:px-6 lg:px-12"
@@ -94,9 +81,22 @@ const RegisterForm = () => {
           <h1 className="text-2xl text-center lg:text-start lg:text-4xl font-bold text-green-500 leading-tight">
             Welcome To Our Registration Portal!
           </h1>
-          <p className="text-md text-center lg:text-md mb-5 font-bold lg:text-justify text-black">
+          <p className="text-md text-center lg:text-md mb-1 font-bold lg:text-justify text-black">
             Create an account to access all features.
           </p>
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-4"
+          >
+            <Link
+              href="/"
+              className="text-lg font-semibold text-center hover:text-green-400 underline text-white"
+            >
+              GO BACK TO HOME PAGE
+            </Link>
+          </motion.div>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, x: 50 }}
