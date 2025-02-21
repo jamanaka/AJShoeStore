@@ -115,7 +115,7 @@ const FAQ = () => {
   const visibleFaqs = showAll ? filteredFaqs : filteredFaqs.slice(0, 5);
 
   return (
-    <div className="w-full bg-white max-w-4xl mx-auto p-4 lg:py-16 flex flex-col lg:flex-row gap-8">
+    <div className="w-full bg-white max-w-4xl mx-auto px-4 py-16 flex flex-col lg:flex-row gap-8">
       {/* Card-like container */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -124,7 +124,7 @@ const FAQ = () => {
         className="bg-white rounded-lg shadow-lg z-40 p-6 flex-1"
       >
         {/* Heading with icon */}
-        <div className="flex items-center mb-4 space-x-2">
+        <div className="flex items-center space-x-2">
           <GlobeIcon className="w-6 h-6 text-blue-500" />
           <h2 className="text-xl font-bold">Frequently Asked Questions</h2>
         </div>

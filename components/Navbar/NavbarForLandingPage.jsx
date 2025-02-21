@@ -27,7 +27,7 @@ const NavbarForLandingPage = () => {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-2xl font-extrabold border hover:shadow text-green-600 shadow-lg bg-gradient-to-l to-blue-900 from-green-900 shadow-green-800 px-8 rounded-full py-3"
+          className="text-2xl font-extrabold border hover:shadow text-green-600 shadow bg-gradient-to-l to-blue-900 from-green-900 shadow-green-800 px-8 rounded-full py-3"
         >
           <Link href="/">
             AJ<span className="text-blue-600">ShoeStore</span>
