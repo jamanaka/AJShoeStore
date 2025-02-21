@@ -115,7 +115,7 @@ const FAQ = () => {
   const visibleFaqs = showAll ? filteredFaqs : filteredFaqs.slice(0, 5);
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 lg:py-16 flex flex-col lg:flex-row gap-8">
+    <div className="w-full bg-white max-w-4xl mx-auto p-4 lg:py-16 flex flex-col lg:flex-row gap-8">
       {/* Card-like container */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}

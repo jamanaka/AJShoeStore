@@ -118,7 +118,7 @@ const newArrivals = [
 
 const TabImages = () => {
   return (
-    <div className="container mx-auto px-4 pb-16 pt-28">
+    <div className="container bg-white mx-auto px-4 pb-16 pt-24">
       {/* Heading and Subheading */}
       <div className="text-center mb-12">
         <motion.h1
@@ -177,7 +177,7 @@ const TabImages = () => {
         </motion.div>
 
         {/* Tabs Content */}
-        <TabsContent value="mens" className="mt-16 md:mt-6">
+        <TabsContent value="mens" className="mt-20 sm:mt-6 md:mt-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {mens.map((card, index) => (
               <motion.div
@@ -225,7 +225,7 @@ const TabImages = () => {
           </div>
         </TabsContent>
 
-        <TabsContent value="womens" className="mt-16 md:mt-6">
+        <TabsContent value="womens" className="mt-20 sm:mt-6 md:mt-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {womens.map((card, index) => (
               <motion.div
@@ -273,7 +273,7 @@ const TabImages = () => {
           </div>
         </TabsContent>
 
-        <TabsContent value="kids" className="mt-16 md:mt-6">
+        <TabsContent value="kids" className="mt-20 sm:mt-6 md:mt-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {kids.map((card, index) => (
               <motion.div
@@ -321,7 +321,7 @@ const TabImages = () => {
           </div>
         </TabsContent>
 
-        <TabsContent value="newArrivals" className="mt-16 md:mt-6">
+        <TabsContent value="newArrivals" className="mt-20 sm:mt-6 md:mt-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {newArrivals.map((card, index) => (
               <motion.div
