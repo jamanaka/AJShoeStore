@@ -120,6 +120,7 @@ const RegisterForm = () => {
                       </FormLabel>
                       <FormControl>
                         <Input
+                          id="fullName"
                           className="text-white w-full px-4 py-3 border h-10 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                           placeholder="Enter your full name"
                           {...field}
@@ -139,6 +140,7 @@ const RegisterForm = () => {
                       </FormLabel>
                       <FormControl>
                         <Input
+                        id="email"
                           className="text-white w-full px-4 py-3 border h-10 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                           placeholder="Enter your email"
                           {...field}
@@ -158,6 +160,8 @@ const RegisterForm = () => {
                       </FormLabel>
                       <FormControl>
                         <Input
+                        id="phoneNumber"
+                        type="number"
                           className="text-white w-full px-4 py-3 border h-10 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                           placeholder="Enter your phone number"
                           {...field}
@@ -178,6 +182,7 @@ const RegisterForm = () => {
                       <FormControl>
                         <div className="relative">
                           <Input
+                          id="password"
                             className="text-white w-full px-4 py-3 border h-10 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                             type={showPassword ? "text" : "password"}
                             placeholder="Enter your password"
@@ -210,6 +215,7 @@ const RegisterForm = () => {
                       <FormControl>
                         <div className="relative">
                           <Input
+                          id="confirmPassword"
                             className="text-white w-full px-4 py-3 border h-10 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                             type={showConfirmPassword ? "text" : "password"}
                             placeholder="Confirm your password"
@@ -243,6 +249,7 @@ const RegisterForm = () => {
                       </FormLabel>
                       <FormControl>
                         <Input
+                        id="address"
                           className="text-white w-full px-4 py-3 border h-10 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                           placeholder="Enter your address"
                           {...field}
@@ -252,7 +259,7 @@ const RegisterForm = () => {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full bg-blue-900">
+                <Button type="submit" id="register" className="w-full bg-blue-900">
                   Register
                 </Button>
                 <div className="text-center text-sm text-white">

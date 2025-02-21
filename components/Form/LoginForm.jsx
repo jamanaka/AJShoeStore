@@ -51,16 +51,6 @@ const LoginForm = () => {
 
   return (
     <div className="bg-gradient-to-l pb-16 to-blue-900 from-green-800">
-      {/* <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5 }}
-        className=""
-      >
-        <Link href="/" className="text-2xl top-5 relative ml-1 w-auto font-extrabold border hover:shadow text-green-600 shadow-lg bg-gradient-to-l to-blue-900 from-green-900 shadow-green-800 px-8 rounded-full py-3">
-          AJ<span className="text-blue-600">ShoeStore</span>
-        </Link>
-      </motion.div> */}
       <div
         ref={sectionRef}
         className="flex flex-col lg:flex-row lg:mt-2 py-2lg-0 justify-center items-center min-h-screen lg: px-4 sm:px-6 lg:px-12"
@@ -120,6 +110,7 @@ const LoginForm = () => {
                       </FormLabel>
                       <FormControl>
                         <Input
+                        id="email"
                           placeholder="Enter your email"
                           {...field}
                           className="text-white w-full px-4 py-3 border h-10 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
@@ -141,6 +132,7 @@ const LoginForm = () => {
                       </FormLabel>
                       <FormControl>
                         <Input
+                        id="password"
                           type="password"
                           placeholder="Enter your password"
                           {...field}
