@@ -25,7 +25,7 @@ const page = () => {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex bg-white flex-col min-h-screen">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-500 to-purple-600 py-20 text-white text-center">
         <h1 className="text-4xl font-bold mb-4">Welcome to Our Shop</h1>

@@ -4,7 +4,7 @@ import Footer from '../../components/Footer/Footer'
 
 const page = () => {
   return (
-    <div>
+    <div className="bg-white">
       <NavbarForLandingPage />
       <Footer />
     </div>
