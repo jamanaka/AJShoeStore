@@ -63,8 +63,8 @@ const RegisterForm = () => {
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
-    <div className="bg-gradient-to-l pb-16 to-blue-900 from-green-800">
-      <motion.div
+    <div className="bg-gradient-to-l to-blue-900 from-green-800">
+      {/* <motion.div
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
@@ -72,29 +72,29 @@ const RegisterForm = () => {
       >
         <Link
           href="/"
-          className="text-2xl top-5 relative ml-1 w-auto font-extrabold border hover:shadow text-green-600 shadow-lg bg-gradient-to-l to-blue-900 from-green-900 shadow-green-800 px-8 rounded-full py-3"
+          className="text-2xl ml-1 w-auto font-extrabold border hover:shadow text-green-600 shadow-lg bg-gradient-to-l to-blue-900 from-green-900 shadow-green-800 px-8 rounded-full py-3"
         >
           AJ<span className="text-blue-600">ShoeStore</span>
         </Link>
-      </motion.div>
+      </motion.div> */}
       <div
         ref={sectionRef}
-        className="flex flex-col lg:flex-row lg:mt-2 py-8 lg-0 justify-center items-center min-h-screen bg-gradient-to-l to-blue-900 from-green-800 lg: px-4 sm:px-6 lg:px-12"
+        className="flex flex-col lg:flex-row lg:mt-2 py-6 lg-0 justify-center items-center min-h-screen bg-gradient-to-l to-blue-900 from-green-800 lg: px-4 sm:px-6 lg:px-12"
       >
         <Toaster /> {/* Add the Toaster component to display toasts */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="w-full lg:w-1/2 max-w-2xl lg:pr-16 py-2 lg:mb-0"
+          className="w-full lg:w-1/2 max-w-2xl lg:pr-16 lg:mb-0"
         >
-          <h1 className="text-4xl text-center lg:text-start lg:text-5xl font-extrabold text-white mb-3 leading-tight">
+          <h1 className="text-4xl text-center lg:text-start lg:text-5xl font-extrabold text-white leading-tight">
             Register
           </h1>
-          <h1 className="text-3xl text-center lg:text-start lg:text-4xl font-bold text-green-500 mb-2 leading-tight">
+          <h1 className="text-2xl text-center lg:text-start lg:text-4xl font-bold text-green-500 leading-tight">
             Welcome To Our Registration Portal!
           </h1>
-          <p className="text-md text-center lg:text-md font-bold lg:text-justify text-black">
+          <p className="text-md text-center lg:text-md mb-5 font-bold lg:text-justify text-black">
             Create an account to access all features.
           </p>
         </motion.div>

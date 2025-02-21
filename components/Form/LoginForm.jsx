@@ -51,7 +51,7 @@ const LoginForm = () => {
 
   return (
     <div className="bg-gradient-to-l pb-16 to-blue-900 from-green-800">
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
@@ -60,7 +60,7 @@ const LoginForm = () => {
         <Link href="/" className="text-2xl top-5 relative ml-1 w-auto font-extrabold border hover:shadow text-green-600 shadow-lg bg-gradient-to-l to-blue-900 from-green-900 shadow-green-800 px-8 rounded-full py-3">
           AJ<span className="text-blue-600">ShoeStore</span>
         </Link>
-      </motion.div>
+      </motion.div> */}
       <div
         ref={sectionRef}
         className="flex flex-col lg:flex-row lg:mt-2 py-2lg-0 justify-center items-center min-h-screen lg: px-4 sm:px-6 lg:px-12"
@@ -75,10 +75,10 @@ const LoginForm = () => {
           <h1 className="text-4xl text-center lg:text-start lg:text-5xl font-extrabold text-white leading-tight">
             Login
           </h1>
-          <h1 className="text-3xl text-center lg:text-start lg:text-4xl font-bold text-green-500 mb-1 leading-tight">
+          <h1 className="text-3xl text-center lg:text-start lg:text-4xl font-bold text-green-500 leading-tight">
             Welcome Back!
           </h1>
-          <p className="text-md lg:text-md font-bold text-center mb-2 lg:text-justify text-black">
+          <p className="text-md lg:text-md font-bold text-center mb-5 lg:text-justify text-black">
             Sign in to your account to continue.
           </p>
         </motion.div>
