@@ -17,7 +17,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import { MailIcon, LockKeyhole } from "lucide-react";
+import { MailIcon, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -32,9 +32,10 @@ const formSchema = z.object({
 });
 
 const LoginForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const { login } = useAuth();
   const router = useRouter();
-  const [loading, setLoading] = useState(false); // Add loading state
+  const [loading, setLoading] = useState(false);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -45,7 +46,7 @@ const LoginForm = () => {
   });
 
   const onSubmit = async (values) => {
-    setLoading(true); // Set loading to true when form is submitted
+    setLoading(true);
     try {
       const response = await fetch("https://ajshoestoe-backend-api.onrender.com/api/auth/login", {
         method: "POST",
@@ -58,24 +59,28 @@ const LoginForm = () => {
           password: values.password,
         }),
       });
-  
+
       const data = await response.json();
-  
+
       if (!response.ok) {
         throw new Error(data.message || "Login failed");
       }
-  
-      // Save the token and user data
-      login(data.token, data.user);
-  
+
+      // Save user data to context
+      login(data.user);
+
       toast.success("Login successful!");
       setTimeout(() => {
-        router.push("/shop"); // Redirect to dashboard after login
+        router.push("/shop");
       }, 2000);
     } catch (error) {
-      toast.error(error.message || "Something went wrong!");
+      if (error.name === "TypeError" && error.message.includes("Failed to fetch")) {
+        toast.error("Network error. Please check your connection.");
+      } else {
+        toast.error(error.message || "Something went wrong!");
+      }
     } finally {
-      setLoading(false); // Set loading to false when submission is complete
+      setLoading(false);
     }
   };
 
@@ -88,7 +93,7 @@ const LoginForm = () => {
         ref={sectionRef}
         className="flex flex-col lg:flex-row lg:mt-2 py-2lg-0 justify-center items-center min-h-screen lg: px-4 sm:px-6 lg:px-12"
       >
-        <Toaster /> {/* Add the Toaster component to display toasts */}
+        <Toaster />
         {/* Left Content */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -165,13 +170,26 @@ const LoginForm = () => {
                         Password
                       </FormLabel>
                       <FormControl>
-                        <Input
-                          id="password"
-                          type="password"
-                          placeholder="Enter your password"
-                          {...field}
-                          className="text-white w-full px-4 py-3 border h-10 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                        />
+                        <div className="relative">
+                          <Input
+                            id="password"
+                            placeholder="Enter your password"
+                            type={showPassword ? "text" : "password"}
+                            {...field}
+                            className="text-white w-full px-4 py-3 border h-10 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                          />
+                          <span
+                            className="absolute right-3 top-3 cursor-pointer"
+                            onClick={() => setShowPassword(!showPassword)}
+                            aria-label={showPassword ? "Hide password" : "Show password"}
+                          >
+                            {showPassword ? (
+                              <EyeOff size={20} className="text-white" />
+                            ) : (
+                              <Eye size={20} className="text-white" />
+                            )}
+                          </span>
+                        </div>
                       </FormControl>
                       <FormMessage className="text-red-500 text-sm" />
                     </FormItem>
@@ -192,7 +210,7 @@ const LoginForm = () => {
                 <Button
                   type="submit"
                   className="w-full bg-blue-900 shadow z-40 hover:bg-green-900 text-green-200 font-bold h-12 py-5 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"
-                  disabled={loading} // Disable button when loading
+                  disabled={loading}
                 >
                   {loading ? (
                     <div className="flex items-center justify-center">
