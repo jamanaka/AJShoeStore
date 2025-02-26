@@ -1,10 +1,12 @@
 "use client";
 
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -15,10 +17,9 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import { MailIcon, LockKeyhole, PhoneIcon } from "lucide-react";
-import { MdLocationOn, MdWhatsapp } from "react-icons/md";
+import { MailIcon, LockKeyhole } from "lucide-react";
 import Link from "next/link";
-import toast, { Toaster } from "react-hot-toast"; // Import toast and Toaster
+import toast, { Toaster } from "react-hot-toast";
 
 // Define the login form schema
 const formSchema = z.object({
@@ -31,6 +32,10 @@ const formSchema = z.object({
 });
 
 const LoginForm = () => {
+  const { login } = useAuth();
+  const router = useRouter();
+  const [loading, setLoading] = useState(false); // Add loading state
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,11 +44,38 @@ const LoginForm = () => {
     },
   });
 
-  const onSubmit = (values) => {
-    console.log("Register form submitted:", values);
-    // Simulate a successful form submission
-    toast.success("Registration successful!"); // Display success toast
-    // form.reset(); // Reset the form fields
+  const onSubmit = async (values) => {
+    setLoading(true); // Set loading to true when form is submitted
+    try {
+      const response = await fetch("https://ajshoestoe-backend-api.onrender.com/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: values.email,
+          password: values.password,
+        }),
+      });
+  
+      const data = await response.json();
+  
+      if (!response.ok) {
+        throw new Error(data.message || "Login failed");
+      }
+  
+      // Save the token and user data
+      login(data.token, data.user);
+  
+      toast.success("Login successful!");
+      setTimeout(() => {
+        router.push("/shop"); // Redirect to dashboard after login
+      }, 2000);
+    } catch (error) {
+      toast.error(error.message || "Something went wrong!");
+    } finally {
+      setLoading(false); // Set loading to false when submission is complete
+    }
   };
 
   const sectionRef = useRef(null);
@@ -55,6 +87,7 @@ const LoginForm = () => {
         ref={sectionRef}
         className="flex flex-col lg:flex-row lg:mt-2 py-2lg-0 justify-center items-center min-h-screen lg: px-4 sm:px-6 lg:px-12"
       >
+        <Toaster /> {/* Add the Toaster component to display toasts */}
         {/* Left Content */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -110,7 +143,7 @@ const LoginForm = () => {
                       </FormLabel>
                       <FormControl>
                         <Input
-                        id="email"
+                          id="email"
                           placeholder="Enter your email"
                           {...field}
                           className="text-white w-full px-4 py-3 border h-10 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
@@ -132,7 +165,7 @@ const LoginForm = () => {
                       </FormLabel>
                       <FormControl>
                         <Input
-                        id="password"
+                          id="password"
                           type="password"
                           placeholder="Enter your password"
                           {...field}
@@ -158,8 +191,19 @@ const LoginForm = () => {
                 <Button
                   type="submit"
                   className="w-full bg-blue-900 shadow z-40 hover:bg-green-900 text-green-200 font-bold h-12 py-5 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"
+                  disabled={loading} // Disable button when loading
                 >
-                  Login
+                  {loading ? (
+                    <div className="flex items-center justify-center">
+                      <svg className="animate-spin h-5 w-5 mr-3 text-white" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Loading...
+                    </div>
+                  ) : (
+                    "Login"
+                  )}
                 </Button>
 
                 {/* Register Link */}

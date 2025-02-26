@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { SpeedInsights } from '@vercel/speed-insights/next';
-
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { AuthProvider } from "@/context/AuthContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +27,6 @@ export const metadata: Metadata = {
   },
 };
 
-
 // ✅ Define viewport separately
 export const viewport = {
   width: "device-width",
@@ -44,8 +43,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
-        <SpeedInsights />
+        {" "}
+        <AuthProvider>
+          {children}
+          <SpeedInsights />
+        </AuthProvider>
       </body>
     </html>
   );
