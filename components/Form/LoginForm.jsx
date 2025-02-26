@@ -47,7 +47,7 @@ const LoginForm = () => {
   const onSubmit = async (values) => {
     setLoading(true); // Set loading to true when form is submitted
     try {
-      const response = await fetch("https://ajshoestoe-backend-api.onrender.com/api/auth/login", {
+      const response = await fetch(["https://ajshoestoe-backend-api.onrender.com/api/auth/login", "http://localhost:5000/api/auth/login"], {
         method: "POST",
         credentials: 'include',
         headers: {
