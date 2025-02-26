@@ -1,5 +1,5 @@
 "use client";
-
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -22,7 +22,7 @@ import Link from "next/link";
 // Define the register form schema
 const formSchema = z
   .object({
-    fullName: z.string().min(2, { message: "Full Name is required." }),
+    fullName: z.string().min(4, { message: "Full Name is required." }),
     email: z.string().email({ message: "Please enter a valid email address." }),
     phoneNumber: z.string().min(10, { message: "Enter a valid phone number." }),
     password: z
@@ -37,6 +37,7 @@ const formSchema = z
   });
 
 const RegisterForm = () => {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -52,12 +53,38 @@ const RegisterForm = () => {
     },
   });
 
-  const onSubmit = (values) => {
-    console.log("Register form submitted:", values);
-    // Simulate a successful form submission
-    toast.success("Registration successful!"); // Display success toast
-    form.reset(); // Reset the form fields
+  const onSubmit = async (values) => {
+    try {
+      const response = await fetch("https://ajshoestoe-backend-api.onrender.com/api/auth/create-user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName: values.fullName,
+          email: values.email,
+          phoneNumber: values.phoneNumber,
+          password: values.password,
+          address: values.address,
+        }),
+      });
+  
+      const data = await response.json();
+  
+      if (!response.ok) {
+        throw new Error(data.message || "Registration failed");
+      }
+  
+      toast.success("Registration successful!");
+      form.reset();
+      setTimeout(() => {
+        router.push("/login");
+      }, 2000);
+    } catch (error) {
+      toast.error(error.message || "Something went wrong!");
+    }
   };
+  
 
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
