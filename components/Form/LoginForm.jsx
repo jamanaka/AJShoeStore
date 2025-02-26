@@ -49,6 +49,7 @@ const LoginForm = () => {
     try {
       const response = await fetch("https://ajshoestoe-backend-api.onrender.com/api/auth/login", {
         method: "POST",
+        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
         },
