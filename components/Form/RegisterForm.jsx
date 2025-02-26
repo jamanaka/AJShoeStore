@@ -76,7 +76,6 @@ const RegisterForm = () => {
       }
   
       toast.success("Registration successful!");
-      form.reset();
       setTimeout(() => {
         router.push("/login");
       }, 2000);
