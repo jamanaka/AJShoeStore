@@ -16,12 +16,18 @@ export const AuthProvider = ({ children }) => {
     if (token && userData) {
       try {
         const parsedUser = JSON.parse(userData); // Parse user data
-        if (parsedUser && typeof parsedUser === "object") {
+
+        // Check if the token is expired (Assuming the token is a JWT)
+        const decodedToken = JSON.parse(atob(token.split(".")[1])); // Decode JWT
+        const currentTime = Math.floor(Date.now() / 1000); // Get current time in seconds
+        if (decodedToken.exp < currentTime) {
+          // Token has expired
+          console.error("Token expired.");
+          sessionStorage.removeItem("token");
+          sessionStorage.removeItem("user");
+        } else {
           setIsAuthenticated(true); // Restore authentication state
           setUser(parsedUser); // Restore user data
-        } else {
-          console.error("Invalid user data in sessionStorage");
-          sessionStorage.removeItem("user"); // Remove invalid data
         }
       } catch (error) {
         console.error("Failed to parse user data:", error);
@@ -33,8 +39,8 @@ export const AuthProvider = ({ children }) => {
   // Login function
   const login = (token, userData) => {
     try {
-      sessionStorage.setItem("token", token); // Store the token in sessionStorage
-      sessionStorage.setItem("user", JSON.stringify(userData)); // Store user data in sessionStorage
+      sessionStorage.setItem("token", token); // Store the token
+      sessionStorage.setItem("user", JSON.stringify(userData)); // Store user data
       setUser(userData); // Set user data
       setIsAuthenticated(true); // Set authenticated to true
     } catch (error) {
@@ -54,8 +60,19 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Function to get token from sessionStorage
+  const getToken = () => {
+    return sessionStorage.getItem("token");
+  };
+
+  // Function to send token with API requests
+  const getAuthHeaders = () => {
+    const token = getToken();
+    return token ? { Authorization: `Bearer ${token}` } : {};
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, login, logout, getAuthHeaders }}>
       {children}
     </AuthContext.Provider>
   );

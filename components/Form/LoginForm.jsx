@@ -64,7 +64,7 @@ const LoginForm = () => {
 
       if (!response.ok) {
         throw new Error(data.message || "Login failed");
-      }
+      } 
 
       // Save user data to context
       login(data.user);
