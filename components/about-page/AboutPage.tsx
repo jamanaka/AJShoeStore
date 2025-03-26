@@ -77,7 +77,7 @@ const AboutPage = () => {
       {/* Enhanced Hero Section */}
       <section className="relative h-[400px] flex items-center justify-center mt-16 w-full overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-l to-blue-900 from-green-900 z-10" />
-        <div className="absolute inset-0 bg-[url('/shoe-factory.jpg')] bg-cover bg-center" />
+        <div className="absolute inset-0 bg-[url(&apos;/shoe-factory.jpg&apos;)] bg-cover bg-center" />
 
         <motion.div
           className="relative z-20 text-center px-4"
@@ -161,12 +161,12 @@ const AboutPage = () => {
               <p className="text-lg text-muted-foreground">
                 What began in a small Milan workshop in 2015 has blossomed into
                 an international movement redefining what shoes can be. Our
-                founder's vision was simple: create footwear that doesn't force
+                founder&apos;s vision was simple: create footwear that doesn&apos;t force
                 you to choose between style and comfort.
               </p>
               <p className="text-lg text-muted-foreground">
                 Today, each collection reflects our Italian heritage fused with
-                modern technology. We've pioneered 12 patented comfort
+                modern technology. We&apos;ve pioneered 12 patented comfort
                 technologies while maintaining artisanal craftsmanship
                 standards.
               </p>
