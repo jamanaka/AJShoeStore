@@ -20,12 +20,12 @@ import toast, { Toaster } from "react-hot-toast"; // Import toast and Toaster
 import Link from "next/link";
 
 // Define the register form schema
-const formSchema = z;
 const phoneSchema = z
   .string()
   .min(7, { message: "Phone number must be at least 10 digits." })
   .max(10, { message: "Phone number must not exceed 15 digits." })
-  .regex(/^\d+$/, { message: "Phone number must contain only digits." })
+  .regex(/^\d+$/, { message: "Phone number must contain only digits." });
+const formSchema = z
   .object({
     fullName: z.string().min(4, { message: "Full Name is required." }),
     email: z.string().email({ message: "Please enter a valid email address." }),
