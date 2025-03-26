@@ -20,11 +20,16 @@ import toast, { Toaster } from "react-hot-toast"; // Import toast and Toaster
 import Link from "next/link";
 
 // Define the register form schema
-const formSchema = z
+const formSchema = z;
+const phoneSchema = z
+  .string()
+  .min(7, { message: "Phone number must be at least 10 digits." })
+  .max(10, { message: "Phone number must not exceed 15 digits." })
+  .regex(/^\d+$/, { message: "Phone number must contain only digits." })
   .object({
     fullName: z.string().min(4, { message: "Full Name is required." }),
     email: z.string().email({ message: "Please enter a valid email address." }),
-    phoneNumber: z.string()( { message: "Enter a valid phone number." }),
+    phoneNumber: phoneSchema,
     password: z
       .string()
       .min(6, { message: "Password must be at least 6 characters." }),
@@ -57,19 +62,22 @@ const RegisterForm = () => {
   const onSubmit = async (values) => {
     setLoading(true); // Set loading to true when form is submitted
     try {
-      const response = await fetch("https://ajshoestoe-backend-api.onrender.com/api/auth/create-user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          fullName: values.fullName,
-          email: values.email,
-          phoneNumber: values.phoneNumber,
-          password: values.password,
-          // address: values.address,
-        }),
-      });
+      const response = await fetch(
+        "https://ajshoestoe-backend-api.onrender.com/api/auth/create-user",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            fullName: values.fullName,
+            email: values.email,
+            phoneNumber: values.phoneNumber,
+            password: values.password,
+            // address: values.address,
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -169,7 +177,7 @@ const RegisterForm = () => {
                       </FormLabel>
                       <FormControl>
                         <Input
-                        id="email"
+                          id="email"
                           className="text-white w-full px-4 py-3 border h-10 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                           placeholder="Enter your email"
                           {...field}
@@ -189,8 +197,8 @@ const RegisterForm = () => {
                       </FormLabel>
                       <FormControl>
                         <Input
-                        id="phoneNumber"
-                        type="number"
+                          id="phoneNumber"
+                          type="number"
                           className="text-white w-full px-4 py-3 border h-10 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                           placeholder="Enter your phone number"
                           {...field}
@@ -211,7 +219,7 @@ const RegisterForm = () => {
                       <FormControl>
                         <div className="relative">
                           <Input
-                          id="password"
+                            id="password"
                             className="text-white w-full px-4 py-3 border h-10 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                             type={showPassword ? "text" : "password"}
                             placeholder="Enter your password"
@@ -244,7 +252,7 @@ const RegisterForm = () => {
                       <FormControl>
                         <div className="relative">
                           <Input
-                          id="confirmPassword"
+                            id="confirmPassword"
                             className="text-white w-full px-4 py-3 border h-10 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                             type={showConfirmPassword ? "text" : "password"}
                             placeholder="Confirm your password"
@@ -268,13 +276,32 @@ const RegisterForm = () => {
                     </FormItem>
                   )}
                 />
-                
-                <Button type="submit" id="register" className="w-full bg-blue-900" disabled={loading}>
+
+                <Button
+                  type="submit"
+                  id="register"
+                  className="w-full bg-blue-900"
+                  disabled={loading}
+                >
                   {loading ? (
                     <div className="flex items-center justify-center">
-                      <svg className="animate-spin h-5 w-5 mr-3 text-white" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      <svg
+                        className="animate-spin h-5 w-5 mr-3 text-white"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
                       </svg>
                       Loading...
                     </div>
