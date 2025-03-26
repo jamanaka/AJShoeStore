@@ -24,7 +24,7 @@ const formSchema = z
   .object({
     fullName: z.string().min(4, { message: "Full Name is required." }),
     email: z.string().email({ message: "Please enter a valid email address." }),
-    phoneNumber: z.string().number( { message: "Enter a valid phone number." }),
+    phoneNumber: z.string()( { message: "Enter a valid phone number." }),
     password: z
       .string()
       .min(6, { message: "Password must be at least 6 characters." }),
