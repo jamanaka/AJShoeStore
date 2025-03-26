@@ -34,7 +34,7 @@ const formSchema = z
       .string()
       .min(6, { message: "Password must be at least 6 characters." }),
     confirmPassword: z.string().min(6, { message: "Confirm your password." }),
-    // address: z.string().optional(),
+    address: z.string().optional(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Your Passwords must match.",
@@ -55,7 +55,7 @@ const RegisterForm = () => {
       phoneNumber: "",
       password: "",
       confirmPassword: "",
-      // address: "",
+      address: "",
     },
   });
 
@@ -74,7 +74,7 @@ const RegisterForm = () => {
             email: values.email,
             phoneNumber: values.phoneNumber,
             password: values.password,
-            // address: values.address,
+            address: values.address,
           }),
         }
       );
@@ -276,7 +276,27 @@ const RegisterForm = () => {
                     </FormItem>
                   )}
                 />
-
+<FormField
+                  control={form.control}
+                  name="address"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white font-medium text-sm">
+                        Address
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          id="address"
+                          type="text"
+                          className="text-white w-full px-4 py-3 border h-10 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                          placeholder="Enter your phone number"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-red-500" />
+                    </FormItem>
+                  )}
+                />
                 <Button
                   type="submit"
                   id="register"
