@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import Image from 'next/image';  // Importing next/image
 
 const values = [
   {
@@ -77,7 +78,15 @@ const AboutPage = () => {
       {/* Enhanced Hero Section */}
       <section className="relative h-[400px] flex items-center justify-center mt-16 w-full overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-l to-blue-900 from-green-900 z-10" />
-        <div className="absolute inset-0 bg-[url(&apos;/shoe-factory.jpg&apos;)] bg-cover bg-center" />
+        <div className="absolute inset-0">
+          <Image
+            src="/shoe-factory.jpg"
+            alt="Shoe Factory"
+            layout="fill"
+            objectFit="cover"
+            className="bg-cover bg-center"
+          />
+        </div>
 
         <motion.div
           className="relative z-20 text-center px-4"
@@ -109,7 +118,7 @@ const AboutPage = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
           >
-            <Button size="lg" className="px-8 bg-blue-600 text-lg">
+            <Button size="lg" className="px-8 bg-blue-600 text-lg" aria-label="Discover collections">
               Discover Our Collections
             </Button>
           </motion.div>
@@ -171,10 +180,10 @@ const AboutPage = () => {
                 standards.
               </p>
               <div className="flex gap-4 pt-4">
-                <Button variant="outline" className="gap-2">
+                <Button variant="outline" className="gap-2" aria-label="Our Factories">
                   <Factory className="w-4 h-4" /> Our Factories
                 </Button>
-                <Button variant="outline" className="gap-2">
+                <Button variant="outline" className="gap-2" aria-label="Global Impact">
                   <Globe className="w-4 h-4" /> Global Impact
                 </Button>
               </div>
@@ -292,10 +301,10 @@ const AboutPage = () => {
             on quality, comfort, or style.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="px-8 text-lg gap-2">
+            <Button size="lg" className="px-8 text-lg gap-2" aria-label="Shop Best Sellers">
               <Heart className="w-5 h-5" /> Shop Best Sellers
             </Button>
-            <Button variant="outline" size="lg" className="px-8 text-lg">
+            <Button variant="outline" size="lg" className="px-8 text-lg" aria-label="Book a Fitting">
               Book a Fitting
             </Button>
           </div>
