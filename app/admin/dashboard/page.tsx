@@ -1,9 +1,10 @@
+import AdminNavbar from '@/components/admin/AdminNavbar'
 import React from 'react'
 
 const page = () => {
   return (
     <div>
-      Admin dashboard
+      <AdminNavbar />
     </div>
   )
 }
