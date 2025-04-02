@@ -5,7 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AuthProvider } from "@/context/AuthContext";
 import ShopNavbar from "@/components/shop/ShopNavbar";
 import Footer from "@/components/Footer/Footer";
-// import ProtectedRoute from "@/components/ProtectedRoute";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -47,14 +47,14 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {" "}
-        {/* <ProtectedRoute> */}
+        <ProtectedRoute>
           <AuthProvider>
             <ShopNavbar />
             {children}
             <Footer />
             <SpeedInsights />
           </AuthProvider>
-        {/* </ProtectedRoute> */}
+        </ProtectedRoute>
       </body>
     </html>
   );
