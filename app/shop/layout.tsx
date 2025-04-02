@@ -17,11 +17,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// ✅ Remove viewport from metadata
 export const metadata: Metadata = {
   title: "AJShoeStore",
-  description:
-    "Shop the latest trends in footwear at AJShoeStore. Find stylish, high-quality shoes for every occasion, from casual to formal. With great prices!",
+  description: "Shop the latest trends in footwear...",
   verification: {
     google: "Y7XAcvHfkyxSQCl6JmQwAhXivRrVXoYpTW7mDL0sR68",
   },
@@ -30,7 +28,6 @@ export const metadata: Metadata = {
   },
 };
 
-// ✅ Define viewport separately
 export const viewport = {
   width: "device-width",
   initialScale: 1,
@@ -43,18 +40,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {" "}
-        <ProtectedRoute>
-          <AuthProvider>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <AuthProvider>
+          <ProtectedRoute>
             <ShopNavbar />
-            {children}
+            <main className="min-h-[calc(100vh-160px)]">
+              {children}
+            </main>
             <Footer />
             <SpeedInsights />
-          </AuthProvider>
-        </ProtectedRoute>
+          </ProtectedRoute>
+        </AuthProvider>
       </body>
     </html>
   );

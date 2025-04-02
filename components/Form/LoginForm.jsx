@@ -17,11 +17,10 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import { MailIcon, Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
 
-// Define the login form schema
 const formSchema = z.object({
   email: z.string().email({
     message: "Please enter a valid email address.",
@@ -45,44 +44,34 @@ const LoginForm = () => {
     },
   });
 
-  const onSubmit = async (values) => {
-    setLoading(true);
-    try {
-      const response = await fetch("https://ajshoestoe-backend-api.onrender.com/api/auth/login", {
-        method: "POST",
-        credentials: 'include',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: values.email,
-          password: values.password,
-        }),
-      });
+  // Modify your onSubmit function
+const onSubmit = async (values) => {
+  setLoading(true);
+  try {
+    const response = await fetch("https://ajshoestoe-backend-api.onrender.com/api/auth/login", {
+      method: "POST",
+      credentials: 'include', // Must keep this
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values)
+    });
 
-      const data = await response.json();
+    const data = await response.json();
+    
+    if (!response.ok) throw new Error(data.message || "Login failed");
 
-      if (!response.ok) {
-        throw new Error(data.message || "Login failed");
-      } 
-
-      // Save user data to context
-      login(data.user);
-
-      toast.success("Login successful!");
-      setTimeout(() => {
-        router.push("/shop");
-      }, 2000);
-    } catch (error) {
-      if (error.name === "TypeError" && error.message.includes("Failed to fetch")) {
-        toast.error("Network error. Please check your connection.");
-      } else {
-        toast.error(error.message || "Something went wrong!");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+    // Wait for auth state to update
+    await new Promise(resolve => setTimeout(resolve, 100));
+    
+    // Redirect logic
+    const returnUrl = sessionStorage.getItem("returnUrl") || "/shop";
+    window.location.href = returnUrl; // Full page reload ensures cookie is read
+    
+  } catch (error) {
+    toast.error(error.message || "Login failed");
+  } finally {
+    setLoading(false);
+  }
+};
 
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
@@ -93,7 +82,8 @@ const LoginForm = () => {
         ref={sectionRef}
         className="flex flex-col lg:flex-row lg:mt-2 py-2lg-0 justify-center items-center min-h-screen lg: px-4 sm:px-6 lg:px-12"
       >
-        <Toaster />
+        <Toaster position="top-center" />
+        
         {/* Left Content */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -134,10 +124,7 @@ const LoginForm = () => {
         >
           <div className="px-8 py-6 bg-none rounded-2xl shadow-xl border border-white">
             <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-4"
-              >
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 {/* Email Field */}
                 <FormField
                   control={form.control}
@@ -149,7 +136,6 @@ const LoginForm = () => {
                       </FormLabel>
                       <FormControl>
                         <Input
-                          id="email"
                           placeholder="Enter your email"
                           {...field}
                           className="text-white w-full px-4 py-3 border h-10 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
@@ -172,7 +158,6 @@ const LoginForm = () => {
                       <FormControl>
                         <div className="relative">
                           <Input
-                            id="password"
                             placeholder="Enter your password"
                             type={showPassword ? "text" : "password"}
                             {...field}
@@ -181,7 +166,6 @@ const LoginForm = () => {
                           <span
                             className="absolute right-3 top-3 cursor-pointer"
                             onClick={() => setShowPassword(!showPassword)}
-                            aria-label={showPassword ? "Hide password" : "Show password"}
                           >
                             {showPassword ? (
                               <EyeOff size={20} className="text-white" />
@@ -209,7 +193,7 @@ const LoginForm = () => {
                 {/* Submit Button */}
                 <Button
                   type="submit"
-                  className="w-full bg-blue-900 shadow z-40 hover:bg-green-900 text-green-200 font-bold h-12 py-5 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"
+                  className="w-full bg-blue-900 hover:bg-green-900 text-green-200 font-bold h-12 py-5 px-6 rounded-lg transition-all"
                   disabled={loading}
                 >
                   {loading ? (
@@ -227,7 +211,7 @@ const LoginForm = () => {
 
                 {/* Register Link */}
                 <div className="text-center text-sm text-white">
-                  Don&apos;t have an account?{" "}
+                  Don't have an account?{" "}
                   <Link
                     href="/register"
                     className="text-blue-400 hover:underline"
