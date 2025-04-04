@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { ShoppingCart, Menu, X } from "lucide-react"; // Import icons for menu and close
 import { motion, AnimatePresence } from "framer-motion"; // For animations
 import Link from "next/link";
-import LogoutButton from "../LogoutButton";
+// import LogoutButton from "../LogoutButton";
 // import { Button } from "../ui/button";
 
 const ShopNavbar = () => {
@@ -67,7 +67,7 @@ const ShopNavbar = () => {
             <ShoppingCart className="h-6 w-6" />
           </Link>
           <Link href="/login">
-            <LogoutButton />
+            {/* <LogoutButton /> */}
           </Link>
         </motion.div>
 
