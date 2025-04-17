@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import { ShoppingCart, Menu, X } from "lucide-react"; // Import icons for menu and close
 import { motion, AnimatePresence } from "framer-motion"; // For animations
 import Link from "next/link";
-// import LogoutButton from "../LogoutButton";
-// import { Button } from "../ui/button";
+import LogoutButton from "../Form/Logout";
 
 const ShopNavbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -66,9 +65,7 @@ const ShopNavbar = () => {
           >
             <ShoppingCart className="h-6 w-6" />
           </Link>
-          <Link href="/login">
-            {/* <LogoutButton /> */}
-          </Link>
+            <LogoutButton />
         </motion.div>
 
         {/* Mobile Menu Button */}
@@ -120,7 +117,7 @@ const ShopNavbar = () => {
                 className="text-white sm:block hover:underline text-sm hover:text-blue-600 transition duration-300"
               >
                 <button className="bg-blue-800 sm:block text-white px-8 py-2 rounded-full hover:bg-gray-800 transition duration-300">
-                  Sign In
+                  Log Out
                 </button>
               </Link>
             </nav>

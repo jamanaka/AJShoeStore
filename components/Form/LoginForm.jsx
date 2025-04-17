@@ -52,13 +52,15 @@ const LoginForm = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: values.email, password: values.password }),
       });
-  
+
+      console.log("Response", response);
+      
       const data = await response.json();
-  
+
+      console.log("Data", data);
+      
       if (!response.ok) throw new Error(data.message || "Login failed");
-  
-      // ✅ Remove this line: login(data.user); 
-  
+    
       toast.success("Login successful!");
       setTimeout(() => router.push("/shop"), 2000);
     } catch (error) {
@@ -213,7 +215,7 @@ const LoginForm = () => {
                 <div className="text-center text-sm text-white">
                   Don&apos;t have an account?{" "}
                   <Link
-                    href="/register"
+                    href="/auth/register"
                     className="text-blue-400 hover:underline"
                   >
                     Register

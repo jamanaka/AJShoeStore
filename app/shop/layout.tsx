@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../../app/globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-// import { AuthProvider } from "@/context/AuthContext";
 import ShopNavbar from "@/components/shop/ShopNavbar";
 import Footer from "@/components/Footer/Footer";
-// import ProtectedRoute from "@/components/ProtectedRoute";
+import ProtectedLayout from "@/components/ProtectedLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,14 +42,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* <AuthProvider> */}
-          {/* <ProtectedRoute> */}
-            <ShopNavbar />
-            <main className="min-h-[calc(100vh-160px)]">{children}</main>
-            <Footer />
-            <SpeedInsights />
-          {/* </ProtectedRoute> */}
-        {/* </AuthProvider> */}
+        <ProtectedLayout>
+          <ShopNavbar />
+          <main className="min-h-[calc(100vh-160px)]">{children}</main>
+          <Footer />
+          <SpeedInsights />
+        </ProtectedLayout>
       </body>
     </html>
   );

@@ -23,7 +23,7 @@ const PromoBanner = () => {
             personalized fit guide, expert recommendations, and special discounts—all
             tailored just for you.
           </p>
-          <Link href="/register">
+          <Link href="/shop">
           <Button className="bg-white text-blue-900 hover:bg-gray-100 font-semibold py-3 px-6 rounded-full">
             Explore Now
           </Button>

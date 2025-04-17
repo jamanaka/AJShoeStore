@@ -24,7 +24,7 @@ const HeroForLandingPage = () => {
           elegant heels, or sturdy boots, we have something for everyone.
         </p>
         <div className="mt-8">
-          <Link href={"/login"}>
+          <Link href={"/shop"}>
             <Button className="hover:opacity-95 rounded-full px-24 py-6 hover:bg-blue-950 bg-green-900 font-bold text-white">
               GET STARTED
             </Button>

@@ -63,12 +63,13 @@ const RegisterForm = () => {
     setLoading(true); // Set loading to true when form is submitted
     try {
       const response = await fetch(
-        "https://ajshoestoe-backend-api.onrender.com/api/auth/create-user",
+        "https://ajshoestoe-backend-api.onrender.com/api/auth/register",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include", // 👈 Important for sessions/cookies
           body: JSON.stringify({
             fullName: values.fullName,
             email: values.email,
@@ -331,7 +332,7 @@ const RegisterForm = () => {
                 </Button>
                 <div className="text-center text-sm text-white">
                   Don&apos;t have an account?{" "}
-                  <Link href="/login" className="text-blue-400 hover:underline">
+                  <Link href="/auth/login" className="text-blue-400 hover:underline">
                     Register
                   </Link>
                 </div>

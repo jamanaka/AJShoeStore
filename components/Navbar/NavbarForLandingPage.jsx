@@ -58,7 +58,7 @@ const NavbarForLandingPage = () => {
           transition={{ duration: 0.5 }}
         >
           <Link
-            href="/register"
+            href="/auth/register"
             className="text-[#258A6D] hidden sm:block hover:underline text-sm hover:text-blue-600 transition duration-300"
           >
             Register
@@ -69,7 +69,7 @@ const NavbarForLandingPage = () => {
           >
             <ShoppingCart className="h-6 w-6" />
           </Link>
-          <Link href="/login">
+          <Link href="/auth/login">
             <button className="bg-blue-800 hidden sm:block text-white px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300">
               Sign In
             </button>
@@ -113,14 +113,14 @@ const NavbarForLandingPage = () => {
                 </Link>
               ))}
               <Link
-                href="/register"
+                href="/auth/register"
                 className="text-white sm:block hover:underline text-sm hover:text-blue-600 transition duration-300"
               >
                 <button className="bg-green-800 sm:block text-white px-7 py-2 rounded-full hover:bg-gray-800 transition duration-300">
                   Register
                 </button>
               </Link>
-              <Link href="/login"
+              <Link href="/auth/login"
               className="text-white sm:block hover:underline text-sm hover:text-blue-600 transition duration-300"
               >
                 <button className="bg-blue-800 sm:block text-white px-8 py-2 rounded-full hover:bg-gray-800 transition duration-300">
