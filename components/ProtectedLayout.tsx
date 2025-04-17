@@ -10,7 +10,7 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/auth/check-auth", {
+        const res = await fetch("https://ajshoestoe-backend-api.onrender.com/api/auth/check-auth", {
           credentials: "include",
         });
         const data = await res.json();

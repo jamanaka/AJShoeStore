@@ -63,7 +63,7 @@ const RegisterForm = () => {
     setLoading(true); // Set loading to true when form is submitted
     try {
       const response = await fetch(
-        "http://localhost:5000/api/auth/register",
+        "https://ajshoestoe-backend-api.onrender.com/api/auth/register",
         {
           method: "POST",
           headers: {
