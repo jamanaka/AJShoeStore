@@ -3,14 +3,22 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function ProtectedLayout({ children }: { children: React.ReactNode }) {
+export default function ProtectedLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true); // 👈 track auth check
 
   useEffect(() => {
+    const baseUrl =
+      process.env.NODE_ENV === "production"
+        ? process.env.NEXT_PUBLIC_API_BASE_URL_PROD
+        : process.env.NEXT_PUBLIC_API_BASE_URL_DEV;
     const checkAuth = async () => {
       try {
-        const res = await fetch("https://ajshoestoe-backend-api.onrender.com/api/auth/check-auth", {
+        const res = await fetch(`${baseUrl}/api/auth/check-auth`, {
           credentials: "include",
         });
         const data = await res.json();
