@@ -62,10 +62,12 @@ const RegisterForm = () => {
 
   const onSubmit = async (values) => {
     setLoading(true); // Set loading to true when form is submitted
+    const baseUrl =
+      process.env.NODE_ENV === "production"
+        ? process.env.NEXT_PUBLIC_API_BASE_URL_PROD
+        : process.env.NEXT_PUBLIC_API_BASE_URL_DEV;
     try {
-      const response = await fetch(
-        "https://ajshoestoe-backend-api.onrender.com/api/auth/register",
-        {
+      const response = await fetch(`${baseUrl}/api/auth/register`,{
           method: "POST",
           headers: {
             "Content-Type": "application/json",

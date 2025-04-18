@@ -7,8 +7,12 @@ export default function LogoutButton() {
   const router = useRouter();
 
   const handleLogout = async () => {
+    const baseUrl =
+      process.env.NODE_ENV === "production"
+        ? process.env.NEXT_PUBLIC_API_BASE_URL_PROD
+        : process.env.NEXT_PUBLIC_API_BASE_URL_DEV;
     try {
-      const res = await fetch("https://ajshoestoe-backend-api.onrender.com/api/auth/logout", {
+      const res = await fetch(`${baseUrl}/api/auth/logout`, {
         method: "POST",
         credentials: "include", // Ensure cookies are sent
       });
