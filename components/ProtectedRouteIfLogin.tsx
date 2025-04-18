@@ -1,46 +1,80 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
-export default function ProtectedLayout({
+export default function ProtectedRouteIfLogin({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(true);
+  const [authChecked, setAuthChecked] = useState(false);
+
+  const protectedPaths = ["/", "/auth/login", "/auth/register", "/contact-us", "/about-us"];
 
   useEffect(() => {
-    const baseUrl =
-      process.env.NODE_ENV === "production"
-        ? process.env.NEXT_PUBLIC_API_BASE_URL_PROD
-        : process.env.NEXT_PUBLIC_API_BASE_URL_DEV;
+    // Skip auth check if we've already done it
+    if (authChecked) {
+      setIsLoading(false);
+      return;
+    }
+
     const checkAuth = async () => {
       try {
+        const baseUrl = process.env.NODE_ENV === "production"
+          ? process.env.NEXT_PUBLIC_API_BASE_URL_PROD
+          : process.env.NEXT_PUBLIC_API_BASE_URL_DEV;
+
         const res = await fetch(`${baseUrl}/api/auth/check-auth`, {
           credentials: "include",
+          cache: 'no-store' // Ensure fresh check
         });
+        
         const data = await res.json();
 
-        if (!data.login) {
-          router.push("/auth/login");
+        if (data.login && protectedPaths.includes(pathname ?? "")) {
+          router.push("/shop");
         } else {
+          setAuthChecked(true); // Mark auth as checked
           setIsLoading(false);
         }
       } catch (err) {
         console.error("Auth check failed:", err);
-        router.push("/auth/login");
+        setAuthChecked(true); // Mark auth as checked even on error
+        setIsLoading(false);
       }
     };
 
     checkAuth();
-  }, [router]);
+  }, [router, pathname, authChecked]);
+
+  // Store auth state in sessionStorage to persist across refreshes
+  useEffect(() => {
+    if (!authChecked) return;
+    
+    const handler = () => {
+      sessionStorage.setItem('authChecked', 'true');
+    };
+    
+    window.addEventListener('beforeunload', handler);
+    return () => window.removeEventListener('beforeunload', handler);
+  }, [authChecked]);
+
+  // Check sessionStorage on initial load
+  useEffect(() => {
+    if (sessionStorage.getItem('authChecked') === 'true') {
+      setAuthChecked(true);
+      setIsLoading(false);
+    }
+  }, []);
 
   if (isLoading) {
     return (
       <div className="min-h-screen w-full flex flex-col items-center justify-center bg-white dark:bg-gray-900 p-6">
-        {/* SVG Spinner */}
+        {/* Your beautiful spinner */}
         <div className="w-20 h-20 mb-6 relative">
           <svg className="animate-spin-slow" viewBox="0 0 64 64">
             <circle
@@ -61,14 +95,10 @@ export default function ProtectedLayout({
               strokeLinecap="round"
             />
           </svg>
-          
-          {/* Optional center logo - replace with your logo */}
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-8 h-8 bg-blue-500 dark:bg-blue-400 rounded-full"></div>
           </div>
         </div>
-
-        {/* Loading text with fade-in animation */}
         <div className="text-center space-y-2 animate-fade-in">
           <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100">
             Securing Your Session
@@ -76,17 +106,6 @@ export default function ProtectedLayout({
           <p className="text-gray-500 dark:text-gray-400 max-w-md">
             We&apos;re verifying your credentials for a secure experience
           </p>
-        </div>
-
-        {/* Optional animated dots */}
-        <div className="mt-8 flex space-x-2">
-          {[...Array(3)].map((_, i) => (
-            <div 
-              key={i}
-              className="w-3 h-3 bg-blue-500 dark:bg-blue-400 rounded-full animate-pulse"
-              style={{ animationDelay: `${i * 0.2}s` }}
-            />
-          ))}
         </div>
       </div>
     );
